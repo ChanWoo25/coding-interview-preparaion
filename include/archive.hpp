@@ -13,9 +13,24 @@ constexpr double DBL_EPS = 0.00000001; // 1e-8
 using VI = std::vector<int>;
 using VVI = std::vector<VI>;
 
+struct Point {
+  double x, y;
+  bool operator < (const Point & point)
+  {
+    return (x < point.x)
+        || (x == point.x && y < point.y);
+  }
+};
+
 class Solution
 {
 public:
+  static auto p812_input()
+    -> std::vector<VVI>;
+  static
+  double p812_largestTriangleArea(
+    VVI & points);
+
   static
   int p10035_areaOfMaxDiagonal(
     std::vector<std::vector<int>>& dimensions);

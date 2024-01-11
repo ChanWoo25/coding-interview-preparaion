@@ -47,9 +47,12 @@ Things to do for DSA preparation:
 
 int main()
 {
-  int a = 4, b = 3, c = 3, d = 4, e = 5, f = 2;
-  auto output00 = Solution::p10036_minMovesToCaptureTheQueen(a, b, c, d, e, f);
-  spdlog::info("Answer00: {}", output00);
+  auto inputs = Solution::p812_input();
+  for (auto input: inputs)
+  {
+    const auto output = Solution::p812_largestTriangleArea(input);
+    spdlog::info("Answer: {}", output);
+  }
 
   return EXIT_SUCCESS;
 }

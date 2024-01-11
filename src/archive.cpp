@@ -1,5 +1,129 @@
 #include <archive.hpp>
 
+
+
+auto Solution::p812_input()
+  -> std::vector<VVI>
+{
+  std::vector<VVI> inputs;
+  inputs.push_back({{0,0},{0,1},{1,0},{0,2},{2,0}});
+  inputs.push_back({{0,0},{0,1},{1,0}});
+  return inputs;
+}
+
+double Solution::p812_largestTriangleArea(
+  std::vector<std::vector<int>> & points)
+{
+  // 3D cross product of OA and OB vectors, (i.e z-component of their "2D" cross product, but remember that it is not defined in "2D").
+  // Returns a positive value, if OAB makes a counter-clockwise turn,
+  // negative for clockwise turn, and zero if the points are collinear.
+  auto cross
+    = [](const Point & O,
+         const Point & A,
+         const Point & B)
+         -> double
+    {
+      return (A.x - O.x) * (B.y - O.y)
+           - (A.y - O.y) * (B.x - O.x);
+    };
+
+  // Returns a list of points on the convex hull in counter-clockwise order.
+  // Note: the last point in the returned list is the same as the first one.
+  auto find_convex_hull
+    = [&](std::vector<Point> & points)
+      -> std::vector<Point>
+    {
+      const int N = static_cast<int>(points.size());
+      if (N <= 3) { return points; }
+
+      std::vector<Point> selected(2*N);
+      int k = 0;
+
+      // Sort points lexicographically
+      sort(points.begin(), points.end());
+
+      // Build lower hull
+      for (int i = 0; i < N; ++i)
+      {
+        while (   k >= 2
+               && cross(selected[k-2],
+                        selected[k-1],
+                        points[i]) <= 0)
+        {
+          k--;
+        }
+        selected[k++] = points[i];
+      }
+
+      // Build upper hull
+      for (int i = N - 1, t = k + 1; i > 0; --i)
+      {
+        while (   k >= t
+               && cross(selected[k-2],
+                        selected[k-1],
+                        points[i-1]) <= 0)
+        {
+          k--;
+        }
+        selected[k++] = points[i-1];
+      }
+
+      spdlog::info("Resize ({}) => ({})", points.size(), k-1);
+      selected.resize(k-1);
+      return selected;
+    };
+
+  // Method 1
+  // O(N^3) Compare All 3Pn Combination
+  auto get_triangle_area
+    = [](const double & x1, const double & y1,
+         const double & x2, const double & y2,
+         const double & x3, const double & y3)
+         -> double
+    {
+      auto tmp = x1*y2 + x2*y3 + x3*y1
+               - x2*y1 - x3*y2 - x1*y3;
+      return 0.5 * std::abs(tmp);
+    };
+
+  std::vector<Point> points_(points.size());
+  for (size_t i = 0; i < points.size(); i++)
+  {
+    points_[i].x = points[i][0];
+    points_[i].y = points[i][1];
+  }
+
+  points_ = find_convex_hull(points_);
+  for (size_t i = 0; i < points_.size(); i++)
+  {
+    points[i][0] = points_[i].x;
+    points[i][1] = points_[i].y;
+  }
+  points.resize(points_.size());
+
+  const int N = static_cast<int>(points.size());
+  int i1, i2, i3;
+  double max_area = -1.0;
+  for (i1 = 0; i1 < N - 2; ++i1)
+  {
+    for (i2 = i1 + 1; i2 < N - 1; ++i2)
+  {
+      for (i3 = i2 + 1; i3 < N; ++i3)
+      {
+        const auto x1 = points[i1][0];
+        const auto y1 = points[i1][1];
+        const auto x2 = points[i2][0];
+        const auto y2 = points[i2][1];
+        const auto x3 = points[i3][0];
+        const auto y3 = points[i3][1];
+        double area = get_triangle_area(x1, y1, x2, y2, x3, y3);
+        max_area = std::max(max_area, area);
+      }
+    }
+  }
+  return max_area;
+}
+
 int Solution::p10035_areaOfMaxDiagonal(
   std::vector<std::vector<int>>& dimensions)
 {

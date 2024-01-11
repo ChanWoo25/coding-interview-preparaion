@@ -17,7 +17,25 @@ goto
 
 ## LeetCode
 
-back to [contents](#contents-table)
+Search pXXX in visual studio code \
+*[Back to contents](#contents-table)*
+
+### 812. Largest Triangle Area
+
+**Main Idea**:
+
+How to compute the area of a triangle [back to contents](#contents-table) \
+We can compute the area of a trianlge using cross product of two vectors. [YouTube](https://www.youtube.com/watch?v=VqBYFsLtrDo)
+
+**Extend**:
+
+- Small improvement:
+  - Consider differenct approaches by minimizing the multiplication operation.
+- Find boundary points first (Find Convex Hull)
+  - $O(NlogN)$: Sort points in list according to x & y position
+  - $O(4N)$: Select Upper hull($O(2N)$) + Lower hull($O(2N)$)
+  - Selected M points => $O(M^3)$
+  - **Total: $O(M^3) + O(NlogN)$ | Worst Case $O(N^3)$**
 
 ### 10035. Maximum Area of Longest Diagonal Rectangle
 
