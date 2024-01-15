@@ -1,6 +1,47 @@
 #include <archive.hpp>
+#include <iostream>
 
+auto Solution::p108_input()
+  -> std::vector<VI>
+{
+  std::vector<VI> inputs;
+  inputs.push_back({-10, -3, 0, 5, 9});
+  inputs.push_back({1, 3});
+  return inputs;
+}
 
+auto Solution::p108_sortedArrayToBST(
+  const VI & nums,
+  int start,
+  int end)
+  -> TreeNode *
+{
+  if (end < start)
+  {
+    return NULL;
+  }
+  else if (end == start)
+  {
+    return new TreeNode(nums[start]);
+  }
+  else
+  {
+    int median = (start + end) / 2;
+    TreeNode * root = new TreeNode(nums[median]);
+    root->left  = p108_sortedArrayToBST(nums, start, median - 1);
+    root->right = p108_sortedArrayToBST(nums, median + 1, end);
+    return root;
+  }
+}
+
+auto Solution::p108_sortedArrayToBST(
+  const VI & nums)
+  -> TreeNode *
+{
+  const auto N
+    = static_cast<int>(nums.size());
+  return p108_sortedArrayToBST(nums, 0, N - 1);
+}
 
 auto Solution::p812_input()
   -> std::vector<VVI>
