@@ -1,5 +1,59 @@
 #include <archive.hpp>
 #include <iostream>
+#include <unordered_map>
+
+
+auto Solution::p70_solve(
+  const int & n)
+  -> int
+{
+  /* Ver 1: Recursion */
+  // if (n == 0 || n == 1)
+  // {
+  //   return 1;
+  // }
+  // return climbStairs(n-1) + climbStairs(n-2);
+
+  /* Ver 2: Memorization */
+  // if (n == 0 || n == 1)
+  // {
+  //   return 1;
+  // }
+  // if (memo.find(n) == memo.end())
+  // {
+  //   memo[n] = climbStairs(n-1, memo)
+  //           + climbStairs(n-2, memo);
+  // }
+  // return memo[n];
+
+  /* Ver 3: Dynamic Programming */
+  // if (n == 0 || n == 1)
+  // {
+  //   return 1;
+  // }
+  // std::vector<int> dp(n+1);
+  // dp[0] = dp[1] = 1;
+  // for (int i = 2; i <= n; i++)
+  // {
+  //   dp[i] = dp[i-1] + dp[i-2];
+  // }
+  // return dp[n];
+
+  /* Ver 4: Dynamic Programming
+          + Space Optimization */
+  if (n == 0 || n == 1)
+  {
+    return 1;
+  }
+  int prev = 1, curr = 1;
+  for (int i = 2; i <= n; i++)
+  {
+    int temp = curr;
+    curr = prev + curr;
+    prev = temp;
+  }
+  return curr;
+}
 
 auto Solution::p108_input()
   -> std::vector<VI>

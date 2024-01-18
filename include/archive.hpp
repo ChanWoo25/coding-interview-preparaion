@@ -47,6 +47,9 @@ class Solution
 {
 public:
 
+  static
+  auto p70_solve(const int & n) -> int;
+
   static auto p108_input()
     -> std::vector<VI>;
   static

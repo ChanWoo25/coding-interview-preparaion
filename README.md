@@ -40,6 +40,25 @@ What is the essential idea to solve this probelm?
 - Extra condition 1:
   - The method to overcome extra condition 1.
 
+### 70. Climbing Stairs
+
+**Problem**:
+
+You are climbing a staircase. It takes `n` steps to reach the top.
+
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+
+**Main Idea**:
+
+When you got `n`, it can be divided by `n-1` / 1 and `n-2` / 2. And 2 cases are not redundant!
+
+So, this is very good problem to get feeling about dynamic programming and recursion.
+
+**Extend** (*What if there are another constraints?*):
+
+- Extra condition 1:
+  - The method to overcome extra condition 1.
+
 ### 108. Convert Sorted Array to Binary Search Tree
 
 **Problem**:
