@@ -1,9 +1,170 @@
-#include <archive.hpp>
-#include <iostream>
+#include "common.hpp"
+#include <archive00k.hpp>
+#include <cstddef>
 #include <unordered_map>
 
+void p1()
+{
+  VVI nums; VI targets;
+  nums.push_back({2, 7, 11, 15});
+  nums.push_back({3, 2, 4});
+  nums.push_back({3, 3});
+  targets.push_back(9);
+  targets.push_back(6);
+  targets.push_back(6);
+  spdlog::info("[p1_twoSum]");
+  for (size_t i = 0; i < nums.size(); ++i) {
+    auto ans = p1_twoSum(nums[i], targets[i]);
+    spdlog::info("ans: ({}, {})", ans[0], ans[1]);
+  }
+  spdlog::info("[p1_twoSum_o1]");
+  for (size_t i = 0; i < nums.size(); ++i) {
+    auto ans = p1_twoSum_o1(nums[i], targets[i]);
+    spdlog::info("ans: ({}, {})", ans[0], ans[1]);
+  }
+}
+auto p1_twoSum(
+  vector<int>& nums,
+  int target)
+  -> vector<int>
+{
+  int i1 {0};
+  int i2 {1};
+  int N = static_cast<int>(nums.size());
+  for (; i1 < N - 1; ++i1)
+  {
+    for (i2 = i1 + 1; i2 < N; ++i2)
+    {
+      if (nums[i1] + nums[i2] == target)
+      {
+        std::vector<int> ans {i1, i2};
+        return ans;
+      }
+    }
+  }
 
-auto Solution::p70_solve(
+  std::cerr << "There is no answer!\n";
+  return std::vector<int>();
+}
+auto p1_twoSum_o1(
+  vector<int>& nums,
+  int target)
+  -> vector<int>
+{
+  const int N = static_cast<int>(nums.size());
+  unordered_map<int, int> index_db;
+
+  /* Building Hash Table */
+  for (int i = 0; i < N; ++i) {
+    index_db[nums[i]] = i;
+  }
+
+  /* Searching */
+  for (int i = 0; i < N; ++i) {
+    const auto residual = target - nums[i];
+    if (index_db.count(residual) && index_db[residual] != i)
+    {
+      return std::vector<int>({i, index_db[residual]});
+    }
+  }
+
+  /* Exception */
+  std::cerr << "There is no answer!\n";
+  return std::vector<int>();
+}
+
+
+void p2()
+{
+
+}
+auto p2_addTwoNumbers(
+  ListNode * l1,
+  ListNode * l2)
+  -> ListNode *
+{
+  int sum = 0;
+  if (l1 != nullptr) { sum += l1->val; }
+  if (l2 != nullptr) { sum += l2->val; }
+
+  ListNode * p = new ListNode(sum % 10);
+  p->next = (sum >= 10)
+          ? p2_addTwoNumbers(l1->next, l2->next, 1)
+          : p2_addTwoNumbers(l1->next, l2->next, 0);
+  return p;
+}
+auto p2_addTwoNumbers(
+  ListNode * l1,
+  ListNode * l2,
+  int carry)
+  -> ListNode *
+{
+  if (l1 == nullptr && l2 == nullptr && carry == 0)
+  {
+    return nullptr;
+  }
+
+  int sum = 0;
+  if (l1 != nullptr) { sum += l1->val; }
+  if (l2 != nullptr) { sum += l2->val; }
+  sum += carry;
+
+  ListNode * p = new ListNode(sum % 10);
+  auto next1 = (l1)?(l1->next):(nullptr);
+  auto next2 = (l2)?(l2->next):(nullptr);
+  p->next = (sum >= 10)
+          ? p2_addTwoNumbers(next1, next2, 1)
+          : p2_addTwoNumbers(next1, next2, 0);
+  return p;
+}
+auto p2_addTwoNumbers_o1(
+  ListNode * l1,
+  ListNode * l2)
+  -> ListNode *
+{
+  ListNode * head = new ListNode();     //new list;
+  ListNode * tail = head;
+  int carry = 0;
+
+  /* Traverse both list */
+  while (l1 != nullptr ||  l2 != nullptr || carry)
+  {
+    int sum = 0;
+
+    // if l1  is not null
+    // add l1-> value to sum
+    if(l1 != nullptr)
+    {
+      sum += l1->val;
+      l1 = l1 -> next;
+    }
+
+    // if l2  is not null
+    // add l2-> value to sum
+    if(l2 != nullptr)
+    {
+      sum += l2->val;
+      l2 = l2 -> next;
+    }
+
+    // add carry to sum
+    sum += carry;
+
+    // carry is updated by sum/10 because for 18 ,
+    // 18 / 10 is 1 which is the carry
+    carry = sum / 10;
+
+    // add sum% 10 to new node as it containg the sum
+    ListNode * node = new ListNode(sum%10);
+    tail->next = node;
+    tail = tail->next;
+  }
+
+  return head->next;
+}
+
+
+auto p70_solve(
   const int & n)
   -> int
 {
@@ -55,7 +216,7 @@ auto Solution::p70_solve(
   return curr;
 }
 
-auto Solution::p108_input()
+auto p108_input()
   -> std::vector<VI>
 {
   std::vector<VI> inputs;
@@ -64,7 +225,7 @@ auto Solution::p108_input()
   return inputs;
 }
 
-auto Solution::p108_sortedArrayToBST(
+auto p108_sortedArrayToBST(
   const VI & nums,
   int start,
   int end)
@@ -88,7 +249,7 @@ auto Solution::p108_sortedArrayToBST(
   }
 }
 
-auto Solution::p108_sortedArrayToBST(
+auto p108_sortedArrayToBST(
   const VI & nums)
   -> TreeNode *
 {
@@ -97,7 +258,7 @@ auto Solution::p108_sortedArrayToBST(
   return p108_sortedArrayToBST(nums, 0, N - 1);
 }
 
-auto Solution::p812_input()
+auto p812_input()
   -> std::vector<VVI>
 {
   std::vector<VVI> inputs;
@@ -106,7 +267,7 @@ auto Solution::p812_input()
   return inputs;
 }
 
-double Solution::p812_largestTriangleArea(
+double p812_largestTriangleArea(
   std::vector<std::vector<int>> & points)
 {
   // 3D cross product of OA and OB vectors, (i.e z-component of their "2D" cross product, but remember that it is not defined in "2D").
@@ -217,126 +378,4 @@ double Solution::p812_largestTriangleArea(
     }
   }
   return max_area;
-}
-
-int Solution::p10035_areaOfMaxDiagonal(
-  std::vector<std::vector<int>>& dimensions)
-{
-  double max_diag2 = std::numeric_limits<double>::min();
-  double wh_diff = -1.0;
-  double area = -1.0;
-  for (const auto & wh: dimensions)
-  {
-      const auto w = static_cast<double>(wh[0]);
-      const auto h = static_cast<double>(wh[1]);
-
-      const auto diag2 = std::pow(w,2) + std::pow(h,2);
-      if (max_diag2 < diag2)
-      {
-        max_diag2 = diag2;
-        wh_diff = std::abs(w - h);
-        area = w * h;
-      }
-      else if (std::abs(max_diag2 - diag2) < DBL_EPS)
-      {
-        if (wh_diff > std::abs(w - h))
-        {
-          wh_diff = std::abs(w - h);
-          area = w * h;
-        }
-      }
-  }
-
-  return area;
-}
-
-  // auto input00 = VVI();
-  // input00.push_back({9, 3});
-  // input00.push_back({8, 6});
-
-  // auto output00 = Solution::p10035_areaOfMaxDiagonal(input00);
-  // spdlog::info("Answer00: {}", output00);
-
-  // auto input01 = VVI();
-  // input01.push_back({3, 4});
-  // input01.push_back({4, 3});
-
-  // auto output01 = Solution::p10035_areaOfMaxDiagonal(input01);
-  // spdlog::info("Answer01: {}", output01);
-
-/**
- * @brief on 8x8 chessboard with given rook, bishop, queen coord
- * 3번을 움직여야 하는 경우는 없다.
- * bishop은 rook 2번을 대체할 수도있지만, 절반밖에 커버하지 못한다.
- * 1. rook으로 바로 잡을 수 있는 경우. => 1
- * 2. rook과 직선상, 사이에 비숍이 있는 경우, => 2
- * 3. Otherwise, bishop과의 직선거리 상에 rook이 있지 않은 이상,
-                 모든 경우에 rook이 2번 안에 잡을 수 있음.
- *
- 복기
- - 조건문이 많은 것은 둘째치고, 일관성이 부족하다.
- - 1번 혹은 2번만이 답이 될 수 있음을 사전에 알고 있다면, 반복문 따위보다는
-   조건문으로 푸는 것이 좋다. 또한 경우의 수가 적은 1번 Case를 앞으로 빼고,
-   2번은 Else 문으로 넘기려고 목표를 정해놓고 구현했으면 좀 더 Clear했을 것이다.
- */
-int Solution::p10036_minMovesToCaptureTheQueen(
-  int a, int b,
-  int c, int d,
-  int e, int f)
-{
-  int rx = a, ry = b; // rook
-  int bx = c, by = d; // bishop
-  int qx = e, qy = f; // queen
-  spdlog::info("rook ({}, {})", rx, ry);
-  spdlog::info("bishop ({}, {})", bx, by);
-  spdlog::info("queen ({}, {})", qx, qy);
-  if ((rx == qx && rx != bx) || // Case 1
-      (ry == qy && ry != by))
-  {
-    return 1;
-  }
-  else if (rx == qx && rx == bx) // Case 2
-  {
-    if ((by < ry && by < qy) ||
-        (by > ry && by > qy))
-    {
-      return 1;
-    }
-  }
-  else if (ry == qy && ry == by) // Case 2
-  {
-    if ((bx < rx && bx < qx) ||
-        (bx > rx && bx > qx))
-    {
-      return 1;
-    }
-  }
-  else
-  {
-    if ((qx + qy) % 2 != (bx + by) % 2) // Never
-    {
-      return 2;
-    }
-    if (std::abs(bx - qx) != std::abs(by - qy)) // Same line
-    {
-      return 2;
-    }
-    else
-    {
-      int xstep = (qx - bx) / std::abs(bx - qx);
-      int ystep = (qy - by) / std::abs(by - qy);
-      spdlog::info("xstep={}, ystep={}", xstep, ystep);
-      for (int x = bx, y = by; x != qx; x += xstep, y += ystep)
-      {
-        if (x == rx && y == ry)
-        {
-          return 2;
-        }
-      }
-      return 1;
-    }
-    return 2;
-  }
-
-  return 2;
 }

@@ -40,6 +40,30 @@ What is the essential idea to solve this probelm?
 - Extra condition 1:
   - The method to overcome extra condition 1.
 
+### 1. Two Sum
+
+**Problem**:
+
+Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to `target`. You may assume that each input would have **exactly one solution**, and you may not use the same element twice. You can return the answer in any order.
+
+**Main Idea**:
+
+The easiest way to solve this problem is the Brute-Force approach. But its time complexity is $O(N^2)$.
+
+To optimze this, we can use unordered_map (= hash table). Access Time Complexity for hast table is $O(1)$ on average. So, we can check answer in constant time for each `num` since we can compute `residual` to get `target`. By storing pre-checked `num` (in `nums`) the matched number to complete `target` is known. It spends $O(N)$ for building hash table, and $O(N)$ for iterating `nums`, Total $2 * O(N)$ Time Complexity.
+
+### 2. Add Two Numbers
+
+**Problem**:
+
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+**Main Idea**:
+
+Note that reversing order to represent a single digist is not a strange thing in a List. Converting a list to an integer type can lead to overflow for large numbers. Therefore, we have to calculate the sum of two digits using two lists without any preprocessing, traversing the nodes while considering carries from sums that equal to or greater than 10. Utilizing a recursive function for its implementation proved to be the most time-efficient approach (but not dramatic).
+
 ### 70. Climbing Stairs
 
 **Problem**:

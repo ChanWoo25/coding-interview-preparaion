@@ -58,7 +58,9 @@ include("cmake/find_spdlog.cmake")
 # Executables #
 ###############
 add_executable(${PACKAGE_NAME}
-  src/archive.cpp
+  src/archive00k.cpp
+  src/archive05k.cpp
+  src/archive10k.cpp
   main.cc)
 target_link_libraries(${PACKAGE_NAME}
   ${SPDLOG_LIBS}

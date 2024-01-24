@@ -1,22 +1,17 @@
 //
 // Author: Chanwoo Lee (https://github.com/ChanWoo25)
 //
-#include <archive.hpp>
+#include <archive00k.hpp>
+#include <archive05k.hpp>
+#include <archive10k.hpp>
 
 #include <spdlog/common.h>
 #include <spdlog/spdlog.h>
-#include <yaml-cpp/yaml.h>
 
 #include <fstream>
 
 int main()
 {
-  auto inputs = Solution::p108_input();
-  for (auto input: inputs)
-  {
-    const auto output = Solution::p108_sortedArrayToBST(input);
-    spdlog::info("Answer: {}", output);
-  }
-
+  p1();
   return EXIT_SUCCESS;
 }
