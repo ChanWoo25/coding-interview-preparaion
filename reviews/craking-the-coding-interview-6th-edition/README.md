@@ -3,7 +3,21 @@
 Table of contents
 
 - [Introduction](#introduction)
-- [Others](#others-experience)
+- [2. Behind the Scenes](#2-behind-the-scenes)
+- [3. Spcial Situations](#3-spcial-situations)
+- [4. Before the Interview](#4-before-the-interview)
+- [5. Behavioral Questions](#5-behavioral-questions)
+- [6. Big O](#6-big-o)
+- [7. Technical Questions](#7-technical-questions)
+- [8. The Offer and Beyond](#8-the-offer-and-beyond)
+- [9. Interview Questions](#9-interview-questions)
+- [10. Solutions](#10-solutions)
+- [11. Advanced Topics](#11-advanced-topics)
+- [12. Interview Questions (p641~)](#12-interview-questions-p641)
+- [12. Code Library (p657~)](#12-code-library-p657)
+- [13. Hints (p664~)](#13-hints-p664)
+- [14. About the author (p708~)](#14-about-the-author-p708)
+- [Reference Interview Reviews](#reference-interview-reviews)
 
 ## Introduction
 
@@ -74,7 +88,54 @@ It helps offer a little insight into the interviewer's mindset.
 
 ## 3. Spcial Situations
 
+It seems helpful to read the relevant part of this book according to the position you're applying for.
+
+- **Experienced Candidates**
+  - If the company you are applying to places importance on DSA interviews for entry-level positions, it's likely the same for experienced positions.
+  - You should be able to articulate and explain your experiences in solving complex problems or bugs.
+  - For this, it's beneficial to keep a record of the challenges you faced in each project.
+  - Additionally, for experienced roles, preparing for system design and architecture, as well as behavioral questions, is even more crucial than for entry-level positions.
+- Testers and Software Design Engineers in Test (SDET)s
+- *PM: Product (and Program) Manager*
+- **Dev Lead and Managers**
+- Startups
+- Acquisitions and Acquihires
+- *For Interviewers*
+
 ## 4. Before the Interview
+
+- You need Great Resume for the interview. But ...
+- You need Great Experience for the Great Resume!
+
+### Getting the Right Experience
+
+- **Am I passionate?**
+  - Do a side project to show my eagerness.
+  - (Ensure that your primary task proceeds well!)
+  - Work on side projects, and it's even better if they tackle real-world problems.
+  - Also, don't worry if the outcomes seem minor; just make sure to choose topics that the companies you want to work for would find interesting.
+- **Am I smart? (strong to the theory?)**
+  - Apply recent studies' results in my project.
+  - Keep journalize my paper review works on any social contents.
+  - Keep learn some basic stuffs. (linear algebra, deep learning, 3d vision ...)
+- **Am I able to write code?**
+  - Keep coding consistently, and don't hesitate to learn new features and languages and try building things on your own.
+  - Participate in coding competitions.
+
+### Writing a Greate Resume
+
+- **Am I passionate?**
+  - Do a side project to show my eagerness.
+  - (Ensure that your primary task proceeds well!)
+  - Work on side projects, and it's even better if they tackle real-world problems.
+  - Also, don't worry if the outcomes seem minor; just make sure to choose topics that the companies you want to work for would find interesting.
+- **Am I smart? (strong to the theory?)**
+  - Apply recent studies' results in my project.
+  - Keep journalize my paper review works on any social contents.
+  - Keep learn some basic stuffs. (linear algebra, deep learning, 3d vision ...)
+- **Am I able to write code?**
+  - Keep coding consistently, and don't hesitate to learn new features and languages and try building things on your own.
+  - Participate in coding competitions.
 
 ## 5. Behavioral Questions
 
@@ -111,7 +172,7 @@ That is, a question that this book states using an array may be asked instead as
 
 ## 14. About the author (p708~)
 
-## Others Experience
+## Reference Interview Reviews
 
 - Review Link: [Here](https://leetcode.com/discuss/interview-experience/3171859/Journey-to-a-FAANG-Company-Amazon-or-SDE2-(L5)-or-Bangalore-or-Oct-2022-Accepted)
 
