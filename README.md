@@ -135,6 +135,28 @@ Compute minimum moves to capture black queen using one rook and one bishop on a 
 > Feedback \
 > 조건문이 많은 것은 둘째치고, 일관성이 부족하다. 1번 혹은 2번만이 답이 될 수 있음을 사전에 알고 있다면, 반복문 따위보다는 조건문으로 푸는 것이 좋다. 또한 경우의 수가 적은 1번 Case를 앞으로 빼고, 2번은 Else 문으로 넘기려고 목표를 정해놓고 구현했으면 좀 더 Clear했을 것이다.
 
+### 3028. Ant on the Boundary (Easy)
+
+**Problem**:
+
+An ant is on a 1-D space's boundary (means `0`-position). You are given an array of non-zero integers nums. The ant starts reading nums from the first element of it to its end.
+
+At each step, it moves according to the value of the current element:
+
+- If `nums[i]` < 0, it moves left by `-nums[i]` units.
+- If `nums[i]` > 0, it moves right by `nums[i]` units.
+
+Return the number of times the ant returns to the boundary(`0`).
+
+**Notes**:
+
+There is an infinite space on both sides of the boundary.
+We check whether the ant is on the boundary only after it has moved |nums[i]| units. In other words, if the ant crosses the boundary during its movement, it does not count.
+
+**Main Idea**:
+
+Will be easily soved using dynamic programming.
+
 ## Interviews
 
 ### Journey to a FAANG Company - Amazon (@Kishan Kumar Patel) [Link](https://leetcode.com/discuss/interview-experience/3171859/Journey-to-a-FAANG-Company-Amazon-or-SDE2-(L5)-or-Bangalore-or-Oct-2022-Accepted)
